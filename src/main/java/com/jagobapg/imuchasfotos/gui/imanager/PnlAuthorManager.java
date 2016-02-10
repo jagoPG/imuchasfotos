@@ -1,4 +1,3 @@
-
 /*
  * Jagoba Pérez Copyright 2014
  * This program is distributed under the terms of the GNU General Public License
@@ -33,6 +32,7 @@ import com.jagobapg.imuchasfotos.dto.Author;
 import com.jagobapg.imuchasfotos.sqlite.DBManipulation;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 import com.jagobapg.imuchasfotos.gui.imanager.GUIImageManager.EGUIManagerState;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 
 /* This class has the author panel manager. Data related to authors is managed from here. This panel is going to be added
  * into GUIImageManager.java */
@@ -83,11 +83,11 @@ public class PnlAuthorManager extends JPanel {
 
         pnlAuthorData.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblAuthorID.setText("Identificador");
+        lblAuthorID.setText(LanguageController.INSTANCE.getString("identifier"));
 
         ftxAuthorID.setEditable(false);
 
-        lblAuthorName.setText("Nombre");
+        lblAuthorName.setText(LanguageController.INSTANCE.getString("name"));
 
         txtAuthorName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -95,35 +95,35 @@ public class PnlAuthorManager extends JPanel {
             }
         });
 
-        btnNewAuthor.setText("Nuevo");
+        btnNewAuthor.setText(LanguageController.INSTANCE.getString("new"));
         btnNewAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewAuthorActionPerformed(evt);
             }
         });
 
-        btnSaveAuthor.setText("Guardar");
+        btnSaveAuthor.setText(LanguageController.INSTANCE.getString("save"));
         btnSaveAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveAuthorActionPerformed(evt);
             }
         });
 
-        btnModifyAuthor.setText("Modificar");
+        btnModifyAuthor.setText(LanguageController.INSTANCE.getString("modify"));
         btnModifyAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyAuthorActionPerformed(evt);
             }
         });
 
-        btnCancelAuthor.setText("Cancelar");
+        btnCancelAuthor.setText(LanguageController.INSTANCE.getString("cancel"));
         btnCancelAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelAuthorActionPerformed(evt);
             }
         });
 
-        btnDeleteAuthor.setText("Eliminar");
+        btnDeleteAuthor.setText(LanguageController.INSTANCE.getString("remove"));
         btnDeleteAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteAuthorActionPerformed(evt);
@@ -313,7 +313,7 @@ public class PnlAuthorManager extends JPanel {
                 dlmAuthorAM.addElement(a);
                 lstAuthorsAM.setSelectedIndex(dlmAuthorAM.getSize() - 1);
             } else {
-                this.parent.setNotification("Autor ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("author_exists"));
             }
         } else if (!name.equals("") && this.authorManagerState == EGUIManagerState.EDIT) {
             // Modify author
@@ -327,10 +327,10 @@ public class PnlAuthorManager extends JPanel {
                 // Update database
                 DBManipulation.INSTANCE.updateAuthorName(a.getId(), name);
             } else {
-                this.parent.setNotification("Autor ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("author_exists"));
             }
         } else {
-            this.parent.setNotification("No ha escrito un autor correcto.");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("author_invalid"));
         }
 
         // Update state
@@ -387,7 +387,7 @@ public class PnlAuthorManager extends JPanel {
         if (txt.length() > 60) {
             txt = txt.substring(0, 60);
             this.txtAuthorName.setText(txt);
-            this.parent.setNotification("Caracteres máximos: 50");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("maximum_characters") + ": 50");
         }
     }
 

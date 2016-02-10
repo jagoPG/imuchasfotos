@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Timer;
 
 import com.jagobapg.imuchasfotos.dto.Topic;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 
 /* This class provides the UI of the image filter by name. */
@@ -52,14 +53,14 @@ public class GUITopicFilter extends java.awt.Dialog {
         DefaultComboBoxModel<Topic> dcm;
 
         pnlContent = new javax.swing.JPanel();
-        lblDescr = new javax.swing.JLabel("Filtrar imágenes por tema.");
+        lblDescr = new javax.swing.JLabel(LanguageController.INSTANCE.getString("filter_images_by_topic"));
         cbxTopic = new javax.swing.JComboBox<Topic>();
         pnlButton = new javax.swing.JPanel();
-        btnApply = new javax.swing.JButton("Aplicar");
+        btnApply = new javax.swing.JButton(LanguageController.INSTANCE.getString("apply"));
         lblNotif = new javax.swing.JLabel("");
 
         setResizable(false);
-        setTitle("Filtro por tema");
+        setTitle(LanguageController.INSTANCE.getString("filter_by_topic"));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -115,7 +116,7 @@ public class GUITopicFilter extends java.awt.Dialog {
             this.status = EGUIFilters.APPLIED;
             this.setVisible(false);
         } else {
-            this.lblNotif.setText("Debe seleccionarse un tema.");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("select_topic"));
             Timer t = new Timer(5000, new ActionListener() { //Wait 5 sec. and delete notification.
 
                 @Override

@@ -28,7 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *  This class inserts a image into a JLabel in a new Thread.
+ * This class inserts a image into a JLabel in a new Thread.
  */
 public class RInsertImageLabel implements Runnable {
 
@@ -36,9 +36,10 @@ public class RInsertImageLabel implements Runnable {
     private final String src;
     private final int new_width;
     private final int new_height;
-    
+
     /**
      * Adjust a photo to a JLabel: remove text and resize image.
+     *
      * @param lbl Label where the photo is going to be set.
      * @param src Path of the photo.
      * @param new_width New width.
@@ -50,14 +51,15 @@ public class RInsertImageLabel implements Runnable {
         this.new_width = new_width;
         this.new_height = new_height;
     }
-    
+
     @Override
     public void run() {
         insertPhotoJLabel(lbl, src, new_width, new_height);
     }
-    
+
     /**
-     * Sets a resized ImageIcon into a JLabel. 
+     * Sets a resized ImageIcon into a JLabel.
+     *
      * @param lbl JLabel to be changed.
      * @param src Source of the image.
      * @param new_width desired width.
@@ -74,22 +76,21 @@ public class RInsertImageLabel implements Runnable {
         height = ii.getIconHeight();
 
         // Initial scaling
-        while((width > new_width && width > 1) && (height > new_height && height > 1)) {
+        while ((width > new_width && width > 1) && (height > new_height && height > 1)) {
             --width;
             --height;
         }
-        
+
         // If it has not been enough, a final scale is performed
-        if(width > new_width) {
+        if (width > new_width) {
             width = (int) lbl.getSize().getWidth();
         }
-        
-        if(height > new_height) {
+
+        if (height > new_height) {
             height = (int) lbl.getSize().getHeight();
         }
 
-        lbl.setIcon(new ImageIcon(ii.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH)));        
+        lbl.setIcon(new ImageIcon(ii.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH)));
     }
-    
-} 
 
+}

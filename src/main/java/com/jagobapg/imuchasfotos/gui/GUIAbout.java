@@ -19,22 +19,25 @@
  * You should have received a copy of the GNU General Public License
  * along with Image Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.jagobapg.imuchasfotos.gui;
 
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
- * Class which will hold information about the developers involved
- * into this software and other related data, license path.
- * 
+ * Class which will hold information about the developers involved into this
+ * software and other related data, license path.
+ *
  * Called from gui.imageManager.GUIImageManager
  */
 public class GUIAbout extends javax.swing.JDialog {
-	private static final long serialVersionUID = 5589819772250797805L;
-	
-	/** Creates new form GUIAbout
+
+    private static final long serialVersionUID = 5589819772250797805L;
+
+    /**
+     * Creates new form GUIAbout
+     *
      * @param parent Parent component.
      * @param modal Focus and hold this window.
      */
@@ -43,14 +46,14 @@ public class GUIAbout extends javax.swing.JDialog {
         initComponents();
         loadPhoto();
     }
-    
+
     /* Load JLabel photo. */
     private void loadPhoto() {
         ImageIcon image = new ImageIcon(this.getClass().getClassLoader().getResource("images/jagoba perez.png"));
         Image image_resized = image.getImage().getScaledInstance(149, 160, Image.SCALE_SMOOTH);
         this.lblLogo.setIcon(new ImageIcon(image_resized));
     }
-    
+
     private void initComponents() {
         pnl = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
@@ -68,10 +71,11 @@ public class GUIAbout extends javax.swing.JDialog {
         txa.setColumns(20);
         txa.setLineWrap(true);
         txa.setRows(5);
-        txa.setText("Copyright 2011. Jagoba Pérez.\nThis software is distributed under the terms of the GNU General Public License. For more details look at the GNU.txt in the program folder.\n\nInitial idea: \n\tNerea Gamarra.\nHelp with database design:\n\tJose Ramón Gómez\n");
+        txa.setText(LanguageController.INSTANCE.getString("about_descr"));
+        txa.setEditable(false);
         txa.setWrapStyleWord(true);
 
-        btnClose.setText("Cerrar");
+        btnClose.setText(LanguageController.INSTANCE.getString("close"));
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -81,27 +85,27 @@ public class GUIAbout extends javax.swing.JDialog {
         javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
         pnl.setLayout(pnlLayout);
         pnlLayout.setHorizontalGroup(
-            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClose))
-                .addGap(18, 18, 18)
-                .addComponent(txa, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnClose))
+                        .addGap(18, 18, 18)
+                        .addComponent(txa, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlLayout.setVerticalGroup(
-            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlLayout.createSequentialGroup()
-                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnClose)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlLayout.createSequentialGroup()
+                                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnClose)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnl);
@@ -110,9 +114,9 @@ public class GUIAbout extends javax.swing.JDialog {
     }
 
     /* Dispose window. */
-	private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {
-	    dispose();
-	}
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+    }
 
     // Variables declaration
     private javax.swing.JButton btnClose;

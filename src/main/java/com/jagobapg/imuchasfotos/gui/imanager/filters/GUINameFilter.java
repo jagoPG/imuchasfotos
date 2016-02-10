@@ -22,6 +22,7 @@
  */
 package com.jagobapg.imuchasfotos.gui.imanager.filters;
 
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -53,14 +54,14 @@ public class GUINameFilter extends java.awt.Dialog {
         lblNotif = new javax.swing.JLabel();
 
         setResizable(false);
-        setTitle("Filtro por nombre");
+        setTitle(LanguageController.INSTANCE.getString("filter_by_name"));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
         });
 
-        lblDescr.setText("Filtrar imágenes por nombre.");
+        lblDescr.setText(LanguageController.INSTANCE.getString("filter_images_by_name"));
         pnlContent.add(lblDescr);
 
         txtName.setMaximumSize(new java.awt.Dimension(200, 20));
@@ -76,7 +77,7 @@ public class GUINameFilter extends java.awt.Dialog {
 
         pnlButton.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        btnApply.setText("Aplicar");
+        btnApply.setText(LanguageController.INSTANCE.getString("apply"));
         btnApply.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnApply.addActionListener(new ActionListener() {
 
@@ -89,7 +90,7 @@ public class GUINameFilter extends java.awt.Dialog {
         pnlButton.add(btnApply);
 
         lblNotif.setForeground(new java.awt.Color(255, 0, 0));
-        lblNotif.setText("jLabel1");
+        lblNotif.setText("");
         pnlButton.add(lblNotif);
 
         add(pnlButton, java.awt.BorderLayout.SOUTH);
@@ -109,7 +110,7 @@ public class GUINameFilter extends java.awt.Dialog {
 
         if (txt.length() > 50) { // Delete text
             Timer t;
-            this.lblNotif.setText("Texto máximo: 50 carácteres.");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("maximum_characters") + ": 50 carácteres.");
             t = new Timer(5000, new ActionListener() { //Wait 5 sec. and delete notification.
 
                 @Override

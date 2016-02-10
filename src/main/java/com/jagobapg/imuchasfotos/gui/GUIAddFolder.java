@@ -25,11 +25,13 @@ package com.jagobapg.imuchasfotos.gui;
 
 import com.jagobapg.imuchasfotos.dto.Folder;
 import com.jagobapg.imuchasfotos.Main;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.sqlite.DBManipulation;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 import com.jagobapg.imuchasfotos.gui.utilities.OSOperations;
 
 import java.io.File;
+import javax.security.auth.callback.LanguageCallback;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -76,7 +78,7 @@ public class GUIAddFolder extends javax.swing.JDialog {
         btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Añadir Carpetas");
+        setTitle(LanguageController.INSTANCE.getString("add_folders"));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -86,18 +88,18 @@ public class GUIAddFolder extends javax.swing.JDialog {
 
         pnl.setLayout(new java.awt.BorderLayout());
 
-        lblText.setText("Seleccione el directorio donde tenga las imágenes a procesar.");
+        lblText.setText(LanguageController.INSTANCE.getString("guiaddfolder_descr"));
 
         txtBusqueda.setEditable(false);
 
-        btnSearch.setText("Explorar");
+        btnSearch.setText(LanguageController.INSTANCE.getString("browse"));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
 
-        btnConfirm.setText("Aceptar");
+        btnConfirm.setText(LanguageController.INSTANCE.getString("accept"));
         btnConfirm.setEnabled(false);
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +109,7 @@ public class GUIAddFolder extends javax.swing.JDialog {
 
         dlm = new DefaultListModel<String>();
         lstFolders.setModel(dlm);
-        dlm.addElement("<Listado de carpetas>");
+        dlm.addElement(LanguageController.INSTANCE.getString("folder_list"));
 
         jstFolders.setViewportView(lstFolders);
 
@@ -125,7 +127,7 @@ public class GUIAddFolder extends javax.swing.JDialog {
             }
         });
 
-        btnClose.setText("Cerrar");
+        btnClose.setText(LanguageController.INSTANCE.getString("close"));
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
@@ -202,7 +204,8 @@ public class GUIAddFolder extends javax.swing.JDialog {
         String dir = txtBusqueda.getText();
 
         if (dir.equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(GUIAddFolder.this, "Debe especificar un directorio.", "Inserte un directorio", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(GUIAddFolder.this, LanguageController.INSTANCE.getString("specify_folder"),
+                    LanguageController.INSTANCE.getString("insert_folder"), JOptionPane.ERROR_MESSAGE);
             if (seekFolder()) {
                 dir = txtBusqueda.getText();
                 addItem_dirList(dir);
@@ -231,7 +234,8 @@ public class GUIAddFolder extends javax.swing.JDialog {
                 lstFolders.setModel(dlmFolders);
                 update(); //Update controls.
             } else if (dlmFolders.getSize() != i && !dir.equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(GUIAddFolder.this, "Error. El directorio que ha señalado, ya existe.", "Directorio existente", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(GUIAddFolder.this, LanguageController.INSTANCE.getString("err_folder_exists"),
+                        LanguageController.INSTANCE.getString("err_folder_exists_title"), JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -242,8 +246,9 @@ public class GUIAddFolder extends javax.swing.JDialog {
         DefaultListModel<String> dlmFolders = (DefaultListModel<String>) lstFolders.getModel();
 
         if (selection == -1) {
-            JOptionPane.showMessageDialog(GUIAddFolder.this, "Error. No ha seleccionado ningún directorio.", "Directorio no seleccionado", JOptionPane.ERROR_MESSAGE);
-        } else { //Delete dir.
+            JOptionPane.showMessageDialog(GUIAddFolder.this, LanguageController.INSTANCE.getString("err_folder_not_selected"),
+                    LanguageController.INSTANCE.getString("err_folder_not_selected_title"), JOptionPane.ERROR_MESSAGE);
+        } else { // delete dir
             dlmFolders.remove(selection);
         }
     }

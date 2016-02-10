@@ -21,6 +21,7 @@
  */
 package com.jagobapg.imuchasfotos.gui;
 
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import java.awt.Image;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -29,13 +30,13 @@ import javax.swing.ImageIcon;
 /**
  * JFrame which will show an error message to the user. A descriptive text will
  * be shown, this information is useful for developers to find a solution to an
- * existing problem.
- * Called from anywhere where an error can happen easily.
+ * existing problem. Called from anywhere where an error can happen easily.
  */
 public class GUIErrorFound extends javax.swing.JFrame {
-	private static final long serialVersionUID = -4576642630449287155L;
-	
-	/**
+
+    private static final long serialVersionUID = -4576642630449287155L;
+
+    /**
      * Creates new form ErrorFound
      */
     public GUIErrorFound(int errorCode, Exception message) {
@@ -53,9 +54,7 @@ public class GUIErrorFound extends javax.swing.JFrame {
         Image image_resized = image.getImage().getScaledInstance(260, 190, Image.SCALE_SMOOTH);
         this.lblImage.setIcon(new ImageIcon(image_resized));
 
-        this.lblText.setText("<html><body>Ha sucedido un error inesperado, envíe la salida del error al soporte para que"
-                + "se localice el error y se pueda solucionar. La salida es la siguiente:<br />"
-                + "(Copiar: CONTROL + C)</body><html>");
+        this.lblText.setText(LanguageController.INSTANCE.getString("unexpected_error"));
     }
 
     public static String getErrorMessage(Exception ex) {
@@ -81,13 +80,13 @@ public class GUIErrorFound extends javax.swing.JFrame {
         txaError = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Error Encontrado");
+        setTitle(LanguageController.INSTANCE.getString("error_found"));
         setResizable(false);
 
         lblImage.setPreferredSize(new java.awt.Dimension(260, 190));
 
         lblText.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        lblText.setText("texto");
+        lblText.setText("");
 
         txaError.setEditable(false);
         txaError.setColumns(20);
@@ -97,33 +96,33 @@ public class GUIErrorFound extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jspError))
-                    .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 23, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jspError))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addGap(62, 62, 62)
+                                                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addContainerGap()
+                                                        .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 23, Short.MAX_VALUE)))
+                        .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jspError, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jspError, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
         );
 
         pack();

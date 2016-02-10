@@ -26,6 +26,7 @@ import com.jagobapg.imuchasfotos.dto.Folder;
 import com.jagobapg.imuchasfotos.dto.Key;
 import com.jagobapg.imuchasfotos.dto.Photo;
 import com.jagobapg.imuchasfotos.dto.Topic;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 
 /**
@@ -213,7 +214,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFoldersPhoto(GUIImageManager.PHOTOS_EACH_PAGE);
 
         numImages = DBQueries.INSTANCE.getSizeAllPhotos();
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ":" + numImages);
 
         // Photos of current list
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID(GUIImageManager.PHOTOS_EACH_PAGE, 0);
@@ -244,7 +245,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFolders_folderFilter(GUIImageManager.PHOTOS_EACH_PAGE, f.getId());
 
         numImages = DBQueries.INSTANCE.getSize_folderFilter(f.getId());
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ":" + numImages);
 
         // Photos of current list
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID_folderFilter(GUIImageManager.PHOTOS_EACH_PAGE, 0, f.getId());
@@ -274,7 +275,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFolders_nameFilter(GUIImageManager.PHOTOS_EACH_PAGE, name);
 
         numImages = DBQueries.INSTANCE.getSize_nameFilter(name);
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ": " + numImages);
 
         /* Photos of current list. */
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID_nameFilter(GUIImageManager.PHOTOS_EACH_PAGE, 0, name);
@@ -304,7 +305,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFolders_keyFilter(GUIImageManager.PHOTOS_EACH_PAGE, key.getId());
 
         numImages = DBQueries.INSTANCE.getSize_keyFilter(key.getId());
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ":"+ numImages);
 
         /* Photos of current list. */
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID_keyFilter(GUIImageManager.PHOTOS_EACH_PAGE, 0, key.getId());
@@ -334,7 +335,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFolders_authorFilter(GUIImageManager.PHOTOS_EACH_PAGE, author.getId());
 
         numImages = DBQueries.INSTANCE.getSize_authorFilter(author.getId());
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ":" + numImages);
 
         // Photos of current list
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID_authorFilter(GUIImageManager.PHOTOS_EACH_PAGE, 0, author.getId());
@@ -364,7 +365,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFolders_topicFilter(GUIImageManager.PHOTOS_EACH_PAGE, topic.getId());
 
         numImages = DBQueries.INSTANCE.getSize_topicFilter(topic.getId());
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ": " + numImages);
 
         // Photos of current list
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID_topicFilter(GUIImageManager.PHOTOS_EACH_PAGE, 0, topic.getId());
@@ -393,7 +394,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFolders_yearFilter(GUIImageManager.PHOTOS_EACH_PAGE, year);
 
         numImages = DBQueries.INSTANCE.getSize_yearFilter(year);
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ": " + numImages);
 
         /* Photos of current list. */
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID_yearFilter(GUIImageManager.PHOTOS_EACH_PAGE, 0, year);
@@ -421,7 +422,7 @@ public final class ImageManagerFilter {
         parent.maxPages = DBQueries.INSTANCE.getNumberFolders_mixedFilter(GUIImageManager.PHOTOS_EACH_PAGE, this.filter_aux, (EFilter) this.and_or_aux, this.filter_aux2);
 
         numImages = DBQueries.INSTANCE.getSize_mixedFilter(this.filter_aux, (EFilter) this.and_or_aux, this.filter_aux2);
-        parent.lblNumImages.setText("Imágenes: " + numImages);
+        parent.lblNumImages.setText(LanguageController.INSTANCE.getString("images") + ": " + numImages);
 
         /* Photos of current list. */
         parent.aPhotoCurrent = DBQueries.INSTANCE.getPhotosFromID_mixedFilter(GUIImageManager.PHOTOS_EACH_PAGE, 0, this.filter_aux, (EFilter) this.and_or_aux, this.filter_aux2);

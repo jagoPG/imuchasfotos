@@ -21,6 +21,7 @@
  */
 package com.jagobapg.imuchasfotos.gui;
 
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.gui.utilities.RConvertQuality;
 
 import java.awt.BorderLayout;
@@ -63,7 +64,7 @@ public class GUIPhoto extends java.awt.Dialog {
 
         setSize(new Dimension(ii.getIconWidth(), ii.getIconHeight()));
         setMaximumSize(new Dimension(x, y));
-        this.lblSize.setText("Tamaño original: " + x + "x" + y);
+        this.lblSize.setText(LanguageController.INSTANCE.getString("original size") + ": " + x + "x" + y);
 
         // Load image
         pnlImage = new TrackPanel(ii.getImage());

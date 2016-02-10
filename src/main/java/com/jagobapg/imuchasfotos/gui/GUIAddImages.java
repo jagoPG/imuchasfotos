@@ -26,6 +26,7 @@ import com.jagobapg.imuchasfotos.sqlite.DBManipulation;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 import com.jagobapg.imuchasfotos.gui.utilities.ActionProgressListener;
 import com.jagobapg.imuchasfotos.gui.utilities.FFPhoto;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.gui.utilities.OSOperations;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public class GUIAddImages extends javax.swing.JDialog {
     private String[] srcFolders = null;
     private String[] dstFolders = null;
     private ArrayList<String> alFolders = null; //List of folders where there are images to be inserted into the database.
-    private FFPhoto photoFilter;
+    private final FFPhoto photoFilter;
 
     /**
      * Copy data from one folder to another and save the images data to the
@@ -67,59 +68,55 @@ public class GUIAddImages extends javax.swing.JDialog {
         initComponents();
 
         /* Launch operations. */
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                Thread th;
-                ActionProgressListener apl = new ActionProgressListener() {
-
-                    @Override
-                    public void setNumberOperations(long operations) {
-                        pbProgress.setMinimum(0);
-                        pbProgress.setMaximum((int) operations);
-                        pbProgress.setValue(0);
-                    }
-
-                    @Override
-                    public void operationDone() {
-                        pbProgress.setValue(pbProgress.getValue() + 1);
-
-                        String progress = pbProgress.getValue() + " de " + pbProgress.getMaximum();
-                        lblNumb.setText(progress);
-                    }
-
-                    @Override
-                    public void setInformationText(String text) {
-                        lblProcess.setText(text);
-                        lblNumb.setText("");
-                    }
-
-                    @Override
-                    public void finished(String txt) {
-                        lblProcess.setText(txt);
-                    }
-
-                };
-
-                /* Copy files. */
-                th = new Thread(new RCopyFiles(apl));
-                th.start();
-                try {
-                    th.join();
-                } catch (InterruptedException ex) {
+        new Thread(() -> {
+            Thread th;
+            ActionProgressListener apl = new ActionProgressListener() {
+                
+                @Override
+                public void setNumberOperations(long operations) {
+                    pbProgress.setMinimum(0);
+                    pbProgress.setMaximum((int) operations);
+                    pbProgress.setValue(0);
                 }
-
-                /* Insert files into database. */
-                listFolders(); // Get all folders.
-                th = new Thread(new RInsertDBFiles(apl));
-                th.start();
-                try {
-                    th.join();
-                } catch (InterruptedException ex) {
+                
+                @Override
+                public void operationDone() {
+                    pbProgress.setValue(pbProgress.getValue() + 1);
+                    
+                    String progress = pbProgress.getValue() + " "+ LanguageController.INSTANCE.getString("of") + " " + 
+                            pbProgress.getMaximum();
+                    lblNumb.setText(progress);
                 }
+                
+                @Override
+                public void setInformationText(String text) {
+                    lblProcess.setText(text);
+                    lblNumb.setText("");
+                }
+                
+                @Override
+                public void finished(String txt) {
+                    lblProcess.setText(txt);
+                }
+                
+            };
+            
+            /* Copy files. */
+            th = new Thread(new RCopyFiles(apl));
+            th.start();
+            try {
+                th.join();
+            } catch (InterruptedException ex) {
             }
 
+            /* Insert files into database. */
+            listFolders(); // Get all folders.
+            th = new Thread(new RInsertDBFiles(apl));
+            th.start();
+            try {
+                th.join();
+            } catch (InterruptedException ex) {
+            }
         }).start();
     }
 
@@ -233,12 +230,12 @@ public class GUIAddImages extends javax.swing.JDialog {
         @Override
         public void run() {
             // Step 1: Calculate number of files
-            apl.setInformationText("Calculando número de ficheros...");
+            apl.setInformationText(LanguageController.INSTANCE.getString("calculating_files"));
             long numbFiles = calculateFiles(srcFolders);
             apl.setNumberOperations(numbFiles);
 
             // Step 2: Create new folders and begin the copying
-            apl.setInformationText("Copiando ficheros...");
+            apl.setInformationText(LanguageController.INSTANCE.getString("copying_files"));
             apl.setNumberOperations(numbFiles);
             copyFiles();
         }
@@ -290,7 +287,7 @@ public class GUIAddImages extends javax.swing.JDialog {
                 copyFiles_processFolder(srcFolders[i], dstFolders[i]);
             }
 
-            apl.finished("¡Hecho!");
+            apl.finished(LanguageController.INSTANCE.getString("done"));
         }
 
         /**
@@ -343,14 +340,14 @@ public class GUIAddImages extends javax.swing.JDialog {
         @Override
         public void run() {
             // Step 1: calculate files
-            apl.setInformationText("Calculando número de ficheros...");
+            apl.setInformationText(LanguageController.INSTANCE.getString("calculating_files"));
             long numFiles = calculateImages(alFolders.toArray(new String[alFolders.size()]));
             apl.setNumberOperations(numFiles);
 
             // Step 2: process files
-            apl.setInformationText("Actualizando información...");
+            apl.setInformationText(LanguageController.INSTANCE.getString("updating_files"));
             insertImagesDB();
-            apl.finished("¡Hecho!");
+            apl.finished(LanguageController.INSTANCE.getString("done"));
 
             // Wait and close window
             try {
@@ -436,10 +433,10 @@ public class GUIAddImages extends javax.swing.JDialog {
         lblNumb = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Procesamiento de fotos");
+        setTitle(LanguageController.INSTANCE.getString("photo_processing"));
         setUndecorated(true);
 
-        lblProcess.setText("Copiando archivos...");
+        lblProcess.setText(LanguageController.INSTANCE.getString("copying_files"));
 
         lblNumb.setText("");
 

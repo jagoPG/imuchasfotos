@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Timer;
 
 import com.jagobapg.imuchasfotos.dto.Key;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 
 /* This class provides the UI of the image filter by key. */
@@ -51,14 +52,14 @@ public class GUIKeyFilter extends java.awt.Dialog {
     private void initComponents() {
         DefaultComboBoxModel<Key> dcm;
         pnlContent = new javax.swing.JPanel();
-        lblDescr = new javax.swing.JLabel("Filtrar imágenes por clave.");
+        lblDescr = new javax.swing.JLabel(LanguageController.INSTANCE.getString("filter_images_by_key"));
         cbxKey = new javax.swing.JComboBox<Key>();
         pnlButton = new javax.swing.JPanel();
-        btnApply = new javax.swing.JButton("Aplicar");
+        btnApply = new javax.swing.JButton(LanguageController.INSTANCE.getString("apply"));
         lblNotif = new javax.swing.JLabel("");
 
         setResizable(false);
-        setTitle("Filtro por clave");
+        setTitle(LanguageController.INSTANCE.getString("filter_by_key"));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -109,7 +110,7 @@ public class GUIKeyFilter extends java.awt.Dialog {
             this.setVisible(false);
         } else {
             Timer t;
-            this.lblNotif.setText("Debe seleccionarse una clave.");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("select_key"));
             t = new Timer(5000, new ActionListener() { //Wait 5 sec. and delete notification.
 
                 @Override

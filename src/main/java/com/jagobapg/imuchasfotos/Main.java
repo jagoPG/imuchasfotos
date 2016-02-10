@@ -25,12 +25,14 @@ package com.jagobapg.imuchasfotos;
 import com.jagobapg.imuchasfotos.gui.GUIAddFolder;
 import com.jagobapg.imuchasfotos.gui.GUIAddImages;
 import com.jagobapg.imuchasfotos.gui.imanager.GUIImageManager;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 
 import java.io.File;
 
 import javax.swing.SwingUtilities;
 
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
+import java.util.Locale;
 
 /**
  * First class that will be called in the program. It will check that the work
@@ -47,6 +49,12 @@ public class Main {
     public static final String IMAGES_FOLDER = "images" + File.separatorChar;
 
     public static void main(String[] args) {
+        try {
+            LanguageController.INSTANCE.setLanguage(Locale.getDefault().getDisplayLanguage());
+        } catch (NullPointerException ex) {
+            LanguageController.INSTANCE.setLanguage("English");
+        }
+        
         // create workspace if it does not exist
         File f = new File(IMAGES_FOLDER);
         if (!f.exists()) f.mkdir();

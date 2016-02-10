@@ -31,6 +31,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 
 import com.jagobapg.imuchasfotos.dto.Format;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.sqlite.DBManipulation;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 
@@ -83,11 +84,11 @@ public class PnlFormatManager extends JPanel {
 
         pnlFormatData.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblFormatID.setText("Identificador");
+        lblFormatID.setText(LanguageController.INSTANCE.getString("identifier"));
 
         ftxFormatID.setEditable(false);
 
-        lblFormatName.setText("Nombre");
+        lblFormatName.setText(LanguageController.INSTANCE.getString("name"));
 
         txtFormatName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -95,35 +96,35 @@ public class PnlFormatManager extends JPanel {
             }
         });
 
-        btnNewFormat.setText("Nuevo");
+        btnNewFormat.setText(LanguageController.INSTANCE.getString("new"));
         btnNewFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewFormatActionPerformed(evt);
             }
         });
 
-        btnModifyFormat.setText("Modificar");
+        btnModifyFormat.setText(LanguageController.INSTANCE.getString("modify"));
         btnModifyFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyFormatActionPerformed(evt);
             }
         });
 
-        btnSaveFormat.setText("Guardar");
+        btnSaveFormat.setText(LanguageController.INSTANCE.getString("save"));
         btnSaveFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveFormatActionPerformed(evt);
             }
         });
 
-        btnCancelFormat.setText("Cancelar");
+        btnCancelFormat.setText(LanguageController.INSTANCE.getString("cancel"));
         btnCancelFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelFormatActionPerformed(evt);
             }
         });
 
-        btnDeleteFormat.setText("Eliminar");
+        btnDeleteFormat.setText(LanguageController.INSTANCE.getString("remove"));
         btnDeleteFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteFormatActionPerformed(evt);
@@ -314,7 +315,7 @@ public class PnlFormatManager extends JPanel {
                 dlmFormatFM.addElement(f);
                 lstFormatFM.setSelectedIndex(dlmFormatFM.getSize() - 1);
             } else {
-                this.parent.setNotification("Formato ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("format_exists"));
             }
         } else if (!name.equals("") && this.formatManagerState == EGUIManagerState.EDIT) {
             // Modify format
@@ -328,10 +329,10 @@ public class PnlFormatManager extends JPanel {
                 // Update database
                 DBManipulation.INSTANCE.updateFormatName(f.getId(), name);
             } else {
-                this.parent.setNotification("Formato ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("format_exists"));
             }
         } else {
-            this.parent.setNotification("No ha escrito un formato correcto.");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("format_invalid"));
         }
 
         // Update status
@@ -387,7 +388,7 @@ public class PnlFormatManager extends JPanel {
         if (txt.length() > 50) {
             txt = txt.substring(0, 50);
             this.txtFormatName.setText(txt);
-            this.parent.setNotification("Caracteres máximos: 50");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("maximum_characters") + ": 50");
         }
     }
 

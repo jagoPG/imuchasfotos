@@ -22,6 +22,7 @@
  */
 package com.jagobapg.imuchasfotos.gui.imanager.filters;
 
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -54,14 +55,14 @@ public class GUIYearFilter extends java.awt.Dialog {
         lblNotif = new javax.swing.JLabel();
 
         setResizable(false);
-        setTitle("Filtro por año");
+        setTitle(LanguageController.INSTANCE.getString("filter_by_year"));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
         });
 
-        lblDescr.setText("Filtrar imágenes por año.");
+        lblDescr.setText("filter_images_by_year");
         pnlContent.add(lblDescr);
 
         txtYear.setMaximumSize(new java.awt.Dimension(200, 20));
@@ -77,7 +78,7 @@ public class GUIYearFilter extends java.awt.Dialog {
 
         pnlButton.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        btnApply.setText("Aplicar");
+        btnApply.setText(LanguageController.INSTANCE.getString("apply"));
         btnApply.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnApply.addActionListener(new ActionListener() {
 
@@ -90,7 +91,7 @@ public class GUIYearFilter extends java.awt.Dialog {
         pnlButton.add(btnApply);
 
         lblNotif.setForeground(new java.awt.Color(255, 0, 0));
-        lblNotif.setText("jLabel1");
+        lblNotif.setText("");
         pnlButton.add(lblNotif);
 
         add(pnlButton, java.awt.BorderLayout.SOUTH);
@@ -114,7 +115,7 @@ public class GUIYearFilter extends java.awt.Dialog {
             Timer t;
             this.txtYear.setText("");
 
-            this.lblNotif.setText("Solo caracteres numéricos admitidos.");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("only_numeric_values"));
             t = new Timer(5000, new ActionListener() { //Wait 5 sec. and delete notification.
 
                 @Override

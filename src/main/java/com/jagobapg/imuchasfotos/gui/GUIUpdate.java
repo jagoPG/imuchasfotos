@@ -22,6 +22,7 @@
  */
 package com.jagobapg.imuchasfotos.gui;
 
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -68,7 +69,7 @@ public class GUIUpdate extends JDialog {
 
     /* Load design. */
     private void initComponents(Frame parent) {
-        setTitle("Actualizar");
+        setTitle(LanguageController.INSTANCE.getString("update"));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         setResizable(false);
@@ -79,8 +80,8 @@ public class GUIUpdate extends JDialog {
         this.pnlMostRecentVersion = new JPanel(new FlowLayout(FlowLayout.LEFT));
         this.lblNextVersion = new JLabel(LBL_RECENT_VERSION);
         this.pnlButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        this.btnUpdate = new JButton("Actualizar");
-        this.btnClose = new JButton("Cerrar");
+        this.btnUpdate = new JButton(LanguageController.INSTANCE.getString("update"));
+        this.btnClose = new JButton(LanguageController.INSTANCE.getString("close"));
 
         /* Top JPanel. */
         this.add(pnlCurrentVersion, BorderLayout.NORTH);
@@ -158,10 +159,10 @@ public class GUIUpdate extends JDialog {
     //Variable declaration
     private JPanel pnlCurrentVersion;
     private JLabel lblCurrentVersion;
-    private static final String LBL_CURRENT_VERSION = "Versión actual: ";
+    private static final String LBL_CURRENT_VERSION = LanguageController.INSTANCE.getString("actual_version") + ": ";
     private JPanel pnlMostRecentVersion;
     private JLabel lblNextVersion;
-    private static final String LBL_RECENT_VERSION = "Versión más reciente: ";
+    private static final String LBL_RECENT_VERSION = LanguageController.INSTANCE.getString("recent_version") + ": ";
     private JPanel pnlButtons;
     private JButton btnUpdate;
     private JButton btnClose;

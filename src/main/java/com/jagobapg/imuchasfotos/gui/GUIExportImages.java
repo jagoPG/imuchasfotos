@@ -53,6 +53,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
 import com.jagobapg.imuchasfotos.dto.Photo;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 
 /**
  * This class is a GUI for exporting images in JPG or ZIP format to a desired
@@ -63,9 +64,9 @@ public class GUIExportImages extends JDialog {
     private static final long serialVersionUID = -4180016407061355733L;
 
     private static final String TEMP_FOLDER = "temp";
-    private static final String JPG_FILE = "Archivos JPG";
-    private static final String ZIP_FILE = "Archivo ZIP";
-    private static final String LBL_FILE_INFO = "Tamaño total de los archivos adjuntos: ";
+    private static final String JPG_FILE = LanguageController.INSTANCE.getString("jpg_files");
+    private static final String ZIP_FILE = LanguageController.INSTANCE.getString("zip_file");
+    private static final String LBL_FILE_INFO = LanguageController.INSTANCE.getString("total_size") + ":";
     private Photo photo;
 
     public GUIExportImages(Frame parent, Photo p) {
@@ -83,29 +84,29 @@ public class GUIExportImages extends JDialog {
 
         // Initialise variables
         this.pnlPhotoSelection = new JPanel();
-        this.rbtSelectedPhoto = new JRadioButton("Enviar foto seleccionada.");
-        this.rbtListPhotos = new JRadioButton("Enviar fotos de la lista.");
+        this.rbtSelectedPhoto = new JRadioButton(LanguageController.INSTANCE.getString("send_selected_photos"));
+        this.rbtListPhotos = new JRadioButton(LanguageController.INSTANCE.getString("send_photos_list"));
         this.pnlList = new JPanel();
         this.spPhotoList = new JScrollPane();
         this.lstPhotos = new JList<Photo>(new DefaultListModel<Photo>());
         this.pnlListButtons = new JPanel();
         this.btnAdd = new JButton("");
         this.btnRemove = new JButton("");
-        this.btnClear = new JButton("Vaciar");
+        this.btnClear = new JButton(LanguageController.INSTANCE.getString("empty"));
         this.pnlQuality = new JPanel();
-        this.rbtLowQ = new JRadioButton("Baja (icono)");
-        this.rbtMediumQ = new JRadioButton("Media (vista previa)");
-        this.rbtHighQ = new JRadioButton("Alta (JPEG)");
+        this.rbtLowQ = new JRadioButton(LanguageController.INSTANCE.getString("lowq"));
+        this.rbtMediumQ = new JRadioButton(LanguageController.INSTANCE.getString("mediumq"));
+        this.rbtHighQ = new JRadioButton(LanguageController.INSTANCE.getString("largeq"));
         this.pnlFormat = new JPanel();
         this.cbxFormat = new JComboBox<String>(new DefaultComboBoxModel<String>());
         this.pnlFiles = new JPanel();
         this.lblFileSize = new JLabel(LBL_FILE_INFO);
         this.pnlButtons = new JPanel();
-        this.btnExport = new JButton("Exportar...");
-        this.btnClose = new JButton("Cerrar");
+        this.btnExport = new JButton(LanguageController.INSTANCE.getString("export"));
+        this.btnClose = new JButton(LanguageController.INSTANCE.getString("close"));
         // End initialise variable
 
-        this.setTitle("Exportar fotos");
+        this.setTitle(LanguageController.INSTANCE.getString("export_photos"));
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.add(this.pnlPhotoSelection);
 
@@ -128,7 +129,7 @@ public class GUIExportImages extends JDialog {
         this.pnlList.setLayout(new BoxLayout(pnlList, BoxLayout.X_AXIS));
         this.pnlList.setAlignmentX(LEFT_ALIGNMENT);
         this.pnlList.setBorder(BorderFactory
-                .createTitledBorder("Lista de fotos"));
+                .createTitledBorder(LanguageController.INSTANCE.getString("photo_list")));
 
         this.spPhotoList.setViewportView(lstPhotos);
         this.spPhotoList.setAlignmentY(TOP_ALIGNMENT);
@@ -163,7 +164,7 @@ public class GUIExportImages extends JDialog {
         bg.add(rbtLowQ);
         bg.add(rbtMediumQ);
         bg.add(rbtHighQ);
-        this.pnlQuality.setBorder(BorderFactory.createTitledBorder("Calidad"));
+        this.pnlQuality.setBorder(BorderFactory.createTitledBorder(LanguageController.INSTANCE.getString("quality")));
         this.pnlQuality.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.pnlQuality.setAlignmentX(LEFT_ALIGNMENT);
         this.pnlQuality.add(rbtLowQ);
@@ -174,7 +175,7 @@ public class GUIExportImages extends JDialog {
         // Format
         this.add(pnlFormat);
         this.pnlFormat.setAlignmentX(LEFT_ALIGNMENT);
-        this.pnlFormat.setBorder(BorderFactory.createTitledBorder("Formato"));
+        this.pnlFormat.setBorder(BorderFactory.createTitledBorder(LanguageController.INSTANCE.getString("format")));
         this.pnlFormat.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.pnlFormat.add(cbxFormat);
         this.cbxFormat.addItem(JPG_FILE);
@@ -184,7 +185,7 @@ public class GUIExportImages extends JDialog {
         // File size
         this.add(pnlFiles);
         this.pnlFiles.setBorder(BorderFactory
-                .createTitledBorder("Información del tamaño"));
+                .createTitledBorder(LanguageController.INSTANCE.getString("size_data")));
         this.pnlFiles.add(lblFileSize);
         this.pnlFiles.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.pnlFiles.setAlignmentX(LEFT_ALIGNMENT);
@@ -364,7 +365,7 @@ public class GUIExportImages extends JDialog {
 
                 /* Compress images if necessary and show size information. */
                 if (cbxFormat.getSelectedItem().equals(ZIP_FILE)) {
-                    RCompressFiles rCompressed = new RCompressFiles("fotos.zip", aFiles);
+                    RCompressFiles rCompressed = new RCompressFiles("images.zip", aFiles);
                     th = new Thread(rCompressed);
                     th.start();
                     try {
@@ -413,7 +414,7 @@ public class GUIExportImages extends JDialog {
     private void btnSendActionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        jfc.setDialogTitle("¿Dónde guardar los ficheros?");
+        jfc.setDialogTitle(LanguageController.INSTANCE.getString("where_save_files"));
 
         if (jfc.showOpenDialog(GUIExportImages.this) == JFileChooser.APPROVE_OPTION) {
             File dirTo = jfc.getSelectedFile();
@@ -427,14 +428,14 @@ public class GUIExportImages extends JDialog {
 
             // Show information message
             if (dirFrom.listFiles().length == 1) {
-                descr = "Se ha exportado la foto en el directorio seleccionado";
+                descr = LanguageController.INSTANCE.getString("photo_exported");
             } else {
-                descr = "Se han exportado las fotos en el directorio seleccionado";
+                descr = LanguageController.INSTANCE.getString("photos_exported");
             }
 
             JOptionPane.showMessageDialog(GUIExportImages.this,
                     descr,
-                    "Exportado",
+                    LanguageController.INSTANCE.getString("exported"),
                     JOptionPane.INFORMATION_MESSAGE);
 
             dispose();
@@ -486,6 +487,7 @@ public class GUIExportImages extends JDialog {
     }
 
     /* Add a photo to the list. */
+    @SuppressWarnings("empty-statement")
     private void btnAddActionPerformed(ActionEvent e) {
         DefaultListModel<Photo> dlm = (DefaultListModel<Photo>) this.lstPhotos.getModel();
         int i;

@@ -41,6 +41,7 @@ import com.jagobapg.imuchasfotos.sqlite.DBManipulation;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 import com.jagobapg.imuchasfotos.gui.*;
 import com.jagobapg.imuchasfotos.gui.imanager.ImageManagerFilter.EFilter;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.gui.utilities.OSOperations;
 import com.jagobapg.imuchasfotos.gui.utilities.PhotoPrint;
 import com.jagobapg.imuchasfotos.gui.utilities.RDeleteFolders;
@@ -56,7 +57,6 @@ import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
-import java.io.IOException;
 import java.text.NumberFormat;
 
 import javax.swing.ButtonGroup;
@@ -64,7 +64,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -80,8 +79,8 @@ public class GUIImageManager extends javax.swing.JFrame {
         CONSULT, EDIT, NEW, NEW_SUBHTHEME
     }
 
-    private static final String STR_NONE_ESP_F = "* Ninguna";
-    private static final String STR_NONE_ESP_M = "* Ninguno";
+    private static final String STR_NONE_ESP_F = "* " + LanguageController.INSTANCE.getString("nonef") ;
+    private static final String STR_NONE_ESP_M = "* " + LanguageController.INSTANCE.getString("nonem") ;
 
     private final ImageManagerFilter img_filter; //Image filter manager.
 
@@ -112,23 +111,23 @@ public class GUIImageManager extends javax.swing.JFrame {
         tbp = new javax.swing.JTabbedPane();
         pnlPhotos = new javax.swing.JPanel();
         pnlPhotosData = new javax.swing.JPanel();
-        lblName = new javax.swing.JLabel("Nombre");
-        lblAuthor = new javax.swing.JLabel("Autor");
-        lblYear = new javax.swing.JLabel("Año");
+        lblName = new javax.swing.JLabel(LanguageController.INSTANCE.getString("name") );
+        lblAuthor = new javax.swing.JLabel(LanguageController.INSTANCE.getString("author") );
+        lblYear = new javax.swing.JLabel(LanguageController.INSTANCE.getString("year") );
         txtName = new javax.swing.JTextField();
         ftxYear = new javax.swing.JFormattedTextField(NumberFormat.getNumberInstance());
-        lblThemes = new javax.swing.JLabel("Temas");
+        lblThemes = new javax.swing.JLabel(LanguageController.INSTANCE.getString("topic") );
         cbxTopics = new javax.swing.JComboBox<Topic>();
         btnAddTopics = new javax.swing.JButton();
         btnRemoveTopics = new javax.swing.JButton();
-        lblKeys = new javax.swing.JLabel("Claves");
+        lblKeys = new javax.swing.JLabel(LanguageController.INSTANCE.getString("keys") );
         cbxKeys = new javax.swing.JComboBox<Key>();
         btnAddKeys = new javax.swing.JButton();
         btnRemoveKeys = new javax.swing.JButton();
         spDescription = new javax.swing.JScrollPane();
         txaDescription = new javax.swing.JTextArea();
-        lblDescription = new javax.swing.JLabel("Descripción");
-        lblID = new javax.swing.JLabel("ID");
+        lblDescription = new javax.swing.JLabel(LanguageController.INSTANCE.getString("description") );
+        lblID = new javax.swing.JLabel(LanguageController.INSTANCE.getString("id") );
         ftxID = new javax.swing.JFormattedTextField(NumberFormat.getNumberInstance());
         lblPhoto = new javax.swing.JLabel();
         spTopics = new javax.swing.JScrollPane();
@@ -136,37 +135,37 @@ public class GUIImageManager extends javax.swing.JFrame {
         spKeys = new javax.swing.JScrollPane();
         lstKeys = new javax.swing.JList<Key>();
         cbxAuthors = new javax.swing.JComboBox<Author>();
-        lblFormat = new javax.swing.JLabel("Formato");
+        lblFormat = new javax.swing.JLabel(LanguageController.INSTANCE.getString("format") );
         cbxFormat = new javax.swing.JComboBox<Format>();
-        lblFolders = new javax.swing.JLabel("Carpetas");
+        lblFolders = new javax.swing.JLabel(LanguageController.INSTANCE.getString("folders") );
         cbxFolders = new javax.swing.JComboBox<Folder>();
         jspPhotos = new javax.swing.JScrollPane();
         lstPhotos = new javax.swing.JList<Photo>();
         btnLeft = new javax.swing.JButton();
         btnRight = new javax.swing.JButton();
-        lblCurrentFolder = new javax.swing.JLabel("Carpeta actual");
+        lblCurrentFolder = new javax.swing.JLabel(LanguageController.INSTANCE.getString("current_folder") );
         tbEditar = new javax.swing.JToggleButton();
-        lblNumImages = new javax.swing.JLabel("Número de imágenes");
+        lblNumImages = new javax.swing.JLabel(LanguageController.INSTANCE.getString("number_images") );
         pnlBottom = new javax.swing.JPanel();
         lblNotif = new javax.swing.JLabel("");
         mbr = new javax.swing.JMenuBar();
-        mnuTools = new javax.swing.JMenu("Herramientas");
-        mniReloadImages = new javax.swing.JMenuItem("Recargar imágenes");
-        mniLoadFolders = new javax.swing.JMenuItem("Gestionar carpetas");
-        mnuFilters = new javax.swing.JMenu("Filtros");
-        rmiNone = new javax.swing.JRadioButtonMenuItem("Ninguno");
-        rmiName = new javax.swing.JRadioButtonMenuItem("Nombre");
-        rmiKey = new javax.swing.JRadioButtonMenuItem("Clave");
-        rmiTopic = new javax.swing.JRadioButtonMenuItem("Tema");
-        rmiAuthor = new javax.swing.JRadioButtonMenuItem("Autor");
-        rmiYear = new javax.swing.JRadioButtonMenuItem("Año");
-        rmiMixed = new javax.swing.JRadioButtonMenuItem("Combinadas");
-        mnuHelp = new javax.swing.JMenu("Ayuda");
-        mniAbout = new javax.swing.JMenuItem("Acerca de...");
-        mnuPhoto = new javax.swing.JMenu("Imágen");
-        mniPrint = new javax.swing.JMenuItem("Imprimir selección");
-        mniExport = new javax.swing.JMenuItem("Exportar imágenes");
-        mniUpdate = new javax.swing.JMenuItem("Actualizar");
+        mnuTools = new javax.swing.JMenu(LanguageController.INSTANCE.getString("tools") );
+        mniReloadImages = new javax.swing.JMenuItem(LanguageController.INSTANCE.getString("reload_images") );
+        mniLoadFolders = new javax.swing.JMenuItem(LanguageController.INSTANCE.getString("manage_folders") );
+        mnuFilters = new javax.swing.JMenu(LanguageController.INSTANCE.getString("filters") );
+        rmiNone = new javax.swing.JRadioButtonMenuItem(LanguageController.INSTANCE.getString("nonem") );
+        rmiName = new javax.swing.JRadioButtonMenuItem(LanguageController.INSTANCE.getString("name") );
+        rmiKey = new javax.swing.JRadioButtonMenuItem(LanguageController.INSTANCE.getString("key") );
+        rmiTopic = new javax.swing.JRadioButtonMenuItem(LanguageController.INSTANCE.getString("topic"));
+        rmiAuthor = new javax.swing.JRadioButtonMenuItem(LanguageController.INSTANCE.getString("author") );
+        rmiYear = new javax.swing.JRadioButtonMenuItem(LanguageController.INSTANCE.getString("year") );
+        rmiMixed = new javax.swing.JRadioButtonMenuItem(LanguageController.INSTANCE.getString("mix") );
+        mnuHelp = new javax.swing.JMenu(LanguageController.INSTANCE.getString("help") );
+        mniAbout = new javax.swing.JMenuItem(LanguageController.INSTANCE.getString("about") );
+        mnuPhoto = new javax.swing.JMenu(LanguageController.INSTANCE.getString("image") );
+        mniPrint = new javax.swing.JMenuItem(LanguageController.INSTANCE.getString("print_selection") );
+        mniExport = new javax.swing.JMenuItem(LanguageController.INSTANCE.getString("export_images") );
+        mniUpdate = new javax.swing.JMenuItem(LanguageController.INSTANCE.getString("update") );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("iMuchasFotos - v" + GUIUpdate.SW_CURRENT_VERSION);
@@ -424,7 +423,7 @@ public class GUIImageManager extends javax.swing.JFrame {
             }
         });
 
-        tbEditar.setText("Modo edición");
+        tbEditar.setText(LanguageController.INSTANCE.getString("edit_mode"));
         tbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbEditarActionPerformed(evt);
@@ -488,12 +487,12 @@ public class GUIImageManager extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tbp.addTab("Gestor de Imágenes", pnlPhotos);
+        tbp.addTab(LanguageController.INSTANCE.getString("image_management") , pnlPhotos);
 
-        tbp.addTab("Gestor de Temas", new PnlTopicManager(this));
-        tbp.addTab("Gestor de Autores", new PnlAuthorManager(this));
-        tbp.addTab("Gestor de Claves", new PnlKeyManager(this));
-        tbp.addTab("Gestor de Formatos", new PnlFormatManager(this));
+        tbp.addTab(LanguageController.INSTANCE.getString("topic_management") , new PnlTopicManager(this));
+        tbp.addTab(LanguageController.INSTANCE.getString("author_management") , new PnlAuthorManager(this));
+        tbp.addTab(LanguageController.INSTANCE.getString("key_management") , new PnlKeyManager(this));
+        tbp.addTab(LanguageController.INSTANCE.getString("format_management") , new PnlFormatManager(this));
 
         pnl.add(tbp, java.awt.BorderLayout.CENTER);
 
@@ -766,7 +765,8 @@ public class GUIImageManager extends javax.swing.JFrame {
         // Labels
         lblNotif.setText("");
         lblNotif.setForeground(Color.red);
-        lblCurrentFolder.setText("Listado " + this.currentPage + " de " + this.maxPages);
+        lblCurrentFolder.setText(LanguageController.INSTANCE.getString("list") + " "  + this.currentPage + " " +
+                LanguageController.INSTANCE.getString("of") + " " + this.maxPages);
     }
 
     /**
@@ -784,7 +784,7 @@ public class GUIImageManager extends javax.swing.JFrame {
         i = new ImageIcon(getClass().getClassLoader().getResource(image_src)).getImage();
         i = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
-        btn.setIcon(new ImageIcon(i)); //Set icon in button.
+        btn.setIcon(new ImageIcon(i)); // set icon in button.
         btn.setText("");
     }
 
@@ -800,7 +800,8 @@ public class GUIImageManager extends javax.swing.JFrame {
 
     /* Update components behaviour. */
     private void refreshPhotoTab() {
-        this.lblCurrentFolder.setText("Listado " + this.currentPage + " de " + this.maxPages);
+        this.lblCurrentFolder.setText(LanguageController.INSTANCE.getString("list") + " "  + this.currentPage + " " +
+                LanguageController.INSTANCE.getString("of") + " " + this.maxPages);
 
         // Buttons
         this.btnLeft.setEnabled(this.currentPage > 1);
@@ -1056,7 +1057,7 @@ public class GUIImageManager extends javax.swing.JFrame {
             } else {
                 Timer t;
                 // show notification and hide
-                lblNotif.setText("Nombre de foto no válido.");
+                lblNotif.setText(LanguageController.INSTANCE.getString("image_name_no_valid"));
                 txtName.setText(p.getName());
                 t = new Timer(5000, new ActionListener() {
 
@@ -1104,15 +1105,10 @@ public class GUIImageManager extends javax.swing.JFrame {
                 txaDescription.setText(txt.trim());
             } else if (tbEditar.isSelected() && txt.trim().equals("") && txt.length() > 255) {
                 // show notification and hide
-                lblNotif.setText("Descripción no válida.");
+                lblNotif.setText(LanguageController.INSTANCE.getString("description_no_valid"));
                 txaDescription.setText(p.getDescription());
-                Timer t = new Timer(5000, new ActionListener() {
-
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        lblNotif.setText("");
-                    }
-
+                Timer t = new Timer(5000, (ActionEvent e) -> {
+                    lblNotif.setText("");
                 });
                 t.start();
             }
@@ -1126,7 +1122,7 @@ public class GUIImageManager extends javax.swing.JFrame {
         if (txt.length() > 255) {
             txt = txt.substring(0, 60);
             this.txtName.setText(txt);
-            this.lblNotif.setText("Caracteres máximos: 255");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("maximum_characters") + ": 255");
         }
     }
 
@@ -1137,7 +1133,7 @@ public class GUIImageManager extends javax.swing.JFrame {
         if (txt.length() > 6) {
             txt = txt.substring(0, 6);
             this.ftxYear.setText(txt);
-            this.lblNotif.setText("Caracteres máximos: 6");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("maximum_characters") +": 6");
         }
     }
 
@@ -1148,7 +1144,7 @@ public class GUIImageManager extends javax.swing.JFrame {
         if (txt.length() > 255) {
             txt = txt.substring(0, 255);
             this.ftxYear.setText(txt);
-            this.lblNotif.setText("Caracteres máximos: 255");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("maximum_characters") + ": 255");
         }
     }
 
@@ -1532,14 +1528,9 @@ public class GUIImageManager extends javax.swing.JFrame {
             }
         } else {
             // Show notification and hide
-            lblNotif.setText("Ninguna foto seleccionada.");
-            Timer t = new Timer(5000, new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    lblNotif.setText("");
-                }
-
+            lblNotif.setText(LanguageController.INSTANCE.getString("no_photo_selected"));
+            Timer t = new Timer(5000, (ActionEvent e1) -> {
+                lblNotif.setText("");
             });
             t.start();
         }
@@ -1553,15 +1544,10 @@ public class GUIImageManager extends javax.swing.JFrame {
 
         if ((p = lstPhotos.getSelectedValue()) != null) {
             if (guiExport == null) {
-                SwingUtilities.invokeLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        DefaultListModel<Photo> dlm = (DefaultListModel<Photo>) lstPhotos.getModel();
-                        guiExport = new GUIExportImages(GUIImageManager.this, dlm.get(lstPhotos.getSelectedIndex()));
-                        guiExport.setVisible(true);
-                    }
-
+                SwingUtilities.invokeLater(() -> {
+                    DefaultListModel<Photo> dlm = (DefaultListModel<Photo>) lstPhotos.getModel();
+                    guiExport = new GUIExportImages(GUIImageManager.this, dlm.get(lstPhotos.getSelectedIndex()));
+                    guiExport.setVisible(true);
                 });
             } else {
                 guiExport.setPhoto(p);
@@ -1569,14 +1555,9 @@ public class GUIImageManager extends javax.swing.JFrame {
             }
         } else {
             // Show notification and hide
-            lblNotif.setText("Ninguna foto seleccionada.");
-            Timer t = new Timer(5000, new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    lblNotif.setText("");
-                }
-
+            lblNotif.setText(LanguageController.INSTANCE.getString("no_photo_selected"));
+            Timer t = new Timer(5000, (ActionEvent e1) -> {
+                lblNotif.setText("");
             });
             t.start();
         }

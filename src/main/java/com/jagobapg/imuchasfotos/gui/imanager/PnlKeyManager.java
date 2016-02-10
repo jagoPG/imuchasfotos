@@ -31,6 +31,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 
 import com.jagobapg.imuchasfotos.dto.Key;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.sqlite.DBManipulation;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 
@@ -87,11 +88,11 @@ public class PnlKeyManager extends JPanel {
 
         pnlKeysData.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblKeyID.setText("Identificador");
+        lblKeyID.setText(LanguageController.INSTANCE.getString("identifier"));
 
         ftxKeyID.setEditable(false);
 
-        lblKeyName.setText("Nombre");
+        lblKeyName.setText(LanguageController.INSTANCE.getString("name"));
 
         txtKeyName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -99,35 +100,35 @@ public class PnlKeyManager extends JPanel {
             }
         });
 
-        btnNewKey.setText("Nuevo");
+        btnNewKey.setText(LanguageController.INSTANCE.getString("new"));
         btnNewKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewKeyActionPerformed(evt);
             }
         });
 
-        btnSaveKey.setText("Guardar");
+        btnSaveKey.setText(LanguageController.INSTANCE.getString("save"));
         btnSaveKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveKeyActionPerformed(evt);
             }
         });
 
-        btnModifyKey.setText("Modificar");
+        btnModifyKey.setText(LanguageController.INSTANCE.getString("modify"));
         btnModifyKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyKeyActionPerformed(evt);
             }
         });
 
-        btnDeleteKey.setText("Eliminar");
+        btnDeleteKey.setText(LanguageController.INSTANCE.getString("remove"));
         btnDeleteKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteKeyActionPerformed(evt);
             }
         });
 
-        btnCancelKey.setText("Cancelar");
+        btnCancelKey.setText(LanguageController.INSTANCE.getString("cancel"));
         btnCancelKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelKeyActionPerformed(evt);
@@ -314,7 +315,7 @@ public class PnlKeyManager extends JPanel {
                 dlmKeyKM.addElement(a);
                 lstKeysKM.setSelectedIndex(dlmKeyKM.getSize() - 1);
             } else {
-                this.parent.setNotification("Clave ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("key_exists"));
             }
         } else if (!name.equals("") && this.keyManagerState == EGUIManagerState.EDIT) {
             // Modify key
@@ -328,10 +329,10 @@ public class PnlKeyManager extends JPanel {
                 // Update database.
                 DBManipulation.INSTANCE.updateKeyName(a.getId(), name);
             } else {
-                this.parent.setNotification("Clave ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("key_exists"));
             }
         } else {
-            this.parent.setNotification("No ha escrito una clave correcta.");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("key_invalid"));
         }
 
         // Update state
@@ -387,7 +388,7 @@ public class PnlKeyManager extends JPanel {
         if (txt.length() > 50) {
             txt = txt.substring(0, 50);
             this.txtKeyName.setText(txt);
-            this.parent.setNotification("Caracteres máximos: 50");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("maximum_characters") + ": 50");
         }
     }
 

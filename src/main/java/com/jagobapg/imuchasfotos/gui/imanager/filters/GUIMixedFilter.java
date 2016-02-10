@@ -23,6 +23,7 @@
 package com.jagobapg.imuchasfotos.gui.imanager.filters;
 
 import com.jagobapg.imuchasfotos.gui.imanager.ImageManagerFilter.EFilter;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -38,11 +39,11 @@ public class GUIMixedFilter extends java.awt.Dialog {
     private static final long serialVersionUID = -7954788825118590295L;
     private EGUIFilters status;
 
-    private static final String TOPIC = "Tema";
-    private static final String KEY = "Clave";
-    private static final String AUTHOR = "Autor";
-    private static final String AND = "Y";
-    private static final String OR = "O";
+    private static final String TOPIC = LanguageController.INSTANCE.getString("topic");
+    private static final String KEY = LanguageController.INSTANCE.getString("key");
+    private static final String AUTHOR = LanguageController.INSTANCE.getString("author");
+    private static final String AND = LanguageController.INSTANCE.getString("and");
+    private static final String OR = LanguageController.INSTANCE.getString("or");
 
     private void initComponents() {
         pnlContent = new javax.swing.JPanel();
@@ -52,11 +53,11 @@ public class GUIMixedFilter extends java.awt.Dialog {
         cbxClause2 = new javax.swing.JComboBox<Object>();
         cbxClause2_value = new javax.swing.JComboBox<Object>();
         pnlButton = new javax.swing.JPanel();
-        btnApply = new javax.swing.JButton("Aplicar");
+        btnApply = new javax.swing.JButton(LanguageController.INSTANCE.getString("apply"));
         lblNotif = new javax.swing.JLabel("");
 
         setResizable(false);
-        setTitle("Filtro mixto");
+        setTitle(LanguageController.INSTANCE.getString("mixed_filter"));
         setSize(new Dimension(800, 100));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -74,7 +75,6 @@ public class GUIMixedFilter extends java.awt.Dialog {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("ACTION");
                 loadComboBox1();
             }
 
@@ -185,7 +185,7 @@ public class GUIMixedFilter extends java.awt.Dialog {
             this.setVisible(false);
         } else {
             Timer t;
-            this.lblNotif.setText("Deben seleccionarse los valores.");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("values_must_select"));
             t = new Timer(5000, new ActionListener() { //Wait 5 sec. and delete notification.
 
                 @Override

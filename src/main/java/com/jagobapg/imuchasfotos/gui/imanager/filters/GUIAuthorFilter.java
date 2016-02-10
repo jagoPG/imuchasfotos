@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Timer;
 
 import com.jagobapg.imuchasfotos.dto.Author;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 
 /* This class provides the UI of the image filter by author. */
@@ -52,14 +53,14 @@ public class GUIAuthorFilter extends java.awt.Dialog {
         DefaultComboBoxModel<Author> dcm;
 
         pnlContent = new javax.swing.JPanel();
-        lblDescr = new javax.swing.JLabel("Filtrar imágenes por autor.");
+        lblDescr = new javax.swing.JLabel(LanguageController.INSTANCE.getString("filter_images_by_author"));
         cbxAuthor = new javax.swing.JComboBox<Author>();
         pnlButton = new javax.swing.JPanel();
-        btnApply = new javax.swing.JButton("Aplicar");
+        btnApply = new javax.swing.JButton(LanguageController.INSTANCE.getString("apply"));
         lblNotif = new javax.swing.JLabel("");
 
         setResizable(false);
-        setTitle("Filtro por autor");
+        setTitle(LanguageController.INSTANCE.getString("filter_by_author"));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -111,7 +112,7 @@ public class GUIAuthorFilter extends java.awt.Dialog {
         } else {
             Timer t;
 
-            this.lblNotif.setText("Debe seleccionarse un autor.");
+            this.lblNotif.setText(LanguageController.INSTANCE.getString("select_author"));
             t = new Timer(5000, new ActionListener() { //Wait 5 sec. and delete notification.
 
                 @Override

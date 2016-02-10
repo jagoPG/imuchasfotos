@@ -32,6 +32,7 @@ import com.jagobapg.imuchasfotos.dto.Topic;
 import com.jagobapg.imuchasfotos.sqlite.DBManipulation;
 import com.jagobapg.imuchasfotos.sqlite.DBQueries;
 import com.jagobapg.imuchasfotos.gui.imanager.GUIImageManager.EGUIManagerState;
+import com.jagobapg.imuchasfotos.gui.utilities.LanguageController;
 
 /**
  * This class has the topic panel manager. Data related to topics is managed
@@ -87,9 +88,9 @@ public class PnlTopicManager extends JPanel {
 
         pnlTopicData.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblSubtopicName.setText("Subtema");
+        lblSubtopicName.setText(LanguageController.INSTANCE.getString("subtopic"));
 
-        lblTopicName.setText("Tema");
+        lblTopicName.setText(LanguageController.INSTANCE.getString("topic"));
 
         txtTopicName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -99,14 +100,14 @@ public class PnlTopicManager extends JPanel {
 
         ftxTopicId.setEditable(false);
 
-        btnModifyTopic.setText("Modificar");
+        btnModifyTopic.setText(LanguageController.INSTANCE.getString("modify"));
         btnModifyTopic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyTopicActionPerformed(evt);
             }
         });
 
-        btnNewSubtopic.setText("Nuevo Subtema");
+        btnNewSubtopic.setText(LanguageController.INSTANCE.getString("new_subtopic"));
         btnNewSubtopic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewSubtopicActionPerformed(evt);
@@ -119,30 +120,30 @@ public class PnlTopicManager extends JPanel {
             }
         });
 
-        lblIDTopic.setText("Identificador");
+        lblIDTopic.setText(LanguageController.INSTANCE.getString("identifier"));
 
-        btnCancelTopic.setText("Cancelar");
+        btnCancelTopic.setText(LanguageController.INSTANCE.getString("cancel"));
         btnCancelTopic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelTopicActionPerformed(evt);
             }
         });
 
-        btnSaveTopic.setText("Guardar");
+        btnSaveTopic.setText(LanguageController.INSTANCE.getString("save"));
         btnSaveTopic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveTopicActionPerformed(evt);
             }
         });
 
-        btnNewTopic.setText(" Nuevo Tema");
+        btnNewTopic.setText(LanguageController.INSTANCE.getString("new_topic"));
         btnNewTopic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewTopicActionPerformed(evt);
             }
         });
 
-        btnDeleteTopic.setText("Eliminar");
+        btnDeleteTopic.setText(LanguageController.INSTANCE.getString("remove"));
         btnDeleteTopic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteTopicActionPerformed(evt);
@@ -380,7 +381,7 @@ public class PnlTopicManager extends JPanel {
                 dlmTopicTM.addElement(t);
                 lstTopicTM.setSelectedIndex(dlmTopicTM.getSize() - 1);
             } else {
-                this.parent.setNotification("Tema ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("topic_invalid"));
             }
         } else if (!subtopic.equals("") && this.topicManagerState == EGUIManagerState.NEW_SUBHTHEME) {
             // New subtopic
@@ -395,7 +396,7 @@ public class PnlTopicManager extends JPanel {
                 dlmTopicTM.add(this.lstTopicTM.getSelectedIndex() + 1, t);
                 lstTopicTM.setSelectedIndex(dlmTopicTM.getSize() - 1);
             } else {
-                this.parent.setNotification("Subtema ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("subtopic_exists"));
             }
         } else if (!topic.equals("") && subtopic.equals("") && this.topicManagerState == EGUIManagerState.EDIT) {
             // Modify topic
@@ -410,7 +411,7 @@ public class PnlTopicManager extends JPanel {
                 t.setTopic(topic);
                 t.setSubtopic(subtopic);
             } else {
-                this.parent.setNotification("Tema ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("topic_exists"));
             }
         } else if (!subtopic.equals("") && this.topicManagerState == EGUIManagerState.EDIT) {
             // Modify subtopic
@@ -425,10 +426,10 @@ public class PnlTopicManager extends JPanel {
                 t.setTopic(topic);
                 t.setSubtopic(subtopic);
             } else {
-                this.parent.setNotification("Subtema ya existente.");
+                this.parent.setNotification(LanguageController.INSTANCE.getString("subtopic_exists"));
             }
         } else {
-            this.parent.setNotification("No ha escrito un tema correcto.");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("subtopic_invalid"));
         }
 
         // Update status
@@ -521,7 +522,7 @@ public class PnlTopicManager extends JPanel {
         if (txt.length() > 255) {
             txt = txt.substring(0, 60);
             this.txtTopicName.setText(txt);
-            this.parent.setNotification("Caracteres máximos: 50");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("maximum_characters") + ": 50");
         }
     }
 
@@ -531,7 +532,7 @@ public class PnlTopicManager extends JPanel {
         if (txt.length() > 60) {
             txt = txt.substring(0, 255);
             this.txtSubtopicName.setText(txt);
-            this.parent.setNotification("Caracteres máximos: 50");
+            this.parent.setNotification(LanguageController.INSTANCE.getString("maximum_characters") + ": 50");
         }
     }
 
